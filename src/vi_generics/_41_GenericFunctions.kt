@@ -29,10 +29,9 @@ fun Set<Char>.partitionLettersAndOtherSymbols(): Pair<Set<Char>, Set<Char>> {
 
 fun <T, C : MutableCollection<in T>> Iterable<T>.partitionTo(first: C, second: C, predicate: (T) -> Boolean): Pair<C, C> {
     for (item in this) {
-        if (predicate(item)) {
-            first.add(item)
-        } else {
-            second.add(item)
+        when (predicate(item)) {
+            true -> first.add(item)
+            false -> second.add(item)
         }
     }
     return Pair(first, second)
